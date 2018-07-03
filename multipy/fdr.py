@@ -38,7 +38,7 @@ Last modified 6th November 2017
 """
 
 import numpy as np
-
+from __future__ import print_function
 from scipy.interpolate import UnivariateSpline
 
 def lsu(pvals, q=0.05):
@@ -174,14 +174,14 @@ def qvalue(pvals, threshold=0.05, verbose=True):
     cs = UnivariateSpline(kappa, pik, k=3, s=None, ext=0)
     pi0 = float(cs(1.))
     if (verbose):
-        print 'The estimated proportion of truly null features is %.3f' % pi0
+        print ('The estimated proportion of truly null features is %.3f' % pi0)
 
     # Sanity check
     # TODO: check whether orig. paper has recommendations how to handle
     if (pi0 < 0 or pi0 > 1):
         pi0 = 1
         if (verbose):
-            print 'The proportion was not in [0, 1] and was set as 1.'
+            print ('The proportion was not in [0, 1] and was set as 1.')
 
     # Compute the q-values.
     qvals = np.zeros(np.shape(pvals))
